@@ -32,7 +32,7 @@
 
     // Request permission for notifications
     document.getElementById('requestPermission').addEventListener('click', () => {
-      messaging.requestPermission()
+      Notification.requestPermission()
         .then(() => {
           console.log("Notification permission granted.");
           // Get token
