@@ -35,6 +35,7 @@
       Notification.requestPermission()
         .then(() => {
           console.log("Notification permission granted.");
+          console.log(messaging);
           // Get token
           return messaging.getToken({ vapidKey: "BLgCiSqVHQh3AC3Kd-JiNOOOsaYgBco2v3Tx9GNKiy_iJA1R6r88RfBX77a9jgwEJ2QEi4b4rkhTrgjeM0RjApk" });
         })
