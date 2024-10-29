@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Messaging Example</title>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"></script>
+</head>
+<body>
+  <h1>Firebase Cloud Messaging</h1>
+  <button id="requestPermission">Request Notification Permission</button>
+  <p id="tokenDisplay">Token: </p>
+
+  <script>
+    // Firebase configuration
+     const firebaseConfig = {
+            apiKey: "AIzaSyAozEohladu0QCS0zgqYBvdQGQBGj-_KNI",
+            authDomain: "mywebapp-89c34.firebaseapp.com",
+            projectId: "mywebapp-89c34",
+            storageBucket: "mywebapp-89c34.appspot.com",
+            messagingSenderId: "406227830633",
+            appId: "1:406227830633:web:3adb4adf63eba35e39dff8",
+            measurementId: "G-HF62RRC88Q"
+        };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Initialize Firebase Cloud Messaging
+    const messaging = firebase.messaging();
+
+    // Request permission for notifications
+    document.getElementById('requestPermission').addEventListener('click', () => {
+      messaging.requestPermission()
+        .then(() => {
+          console.log("Notification permission granted.");
+          // Get token
+          return messaging.getToken({ vapidKey: "YOUR_PUBLIC_VAPID_KEY" });
+        })
+        .then((token) => {
+          console.log("Generated Token:", token);
+          document.getElementById('tokenDisplay').innerText = "Token: " + token;
+        })
+        .catch((error) => {
+          console.error("Permission denied or error occurred:", error);
+        });
+    });
+
+    // Handle incoming messages
+    messaging.onMessage((payload) => {
+      console.log("Message received:", payload);
+      alert("New Message: " + payload.notification.title);
+    });
+  </script>
+</body>
+</html>
+
