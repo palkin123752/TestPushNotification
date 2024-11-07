@@ -19,9 +19,9 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
   console.log("Received background message ", JSON.stringify(payload));
-  const notificationTitle = payload.notification.title;
+  const notificationTitle = payload.body.title;
   const notificationOptions = {
-    body: payload.notification.body,
+    body: payload.body.body,
     icon: '/firebase-logo.png' // Optional: Customize the icon path
   };
 
