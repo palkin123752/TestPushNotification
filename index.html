@@ -51,7 +51,7 @@
     // Handle incoming messages
     messaging.onMessage((payload) => {
       console.log("Message received:", JSON.stringify(payload));
-      alert("New Message: " + payload.notification.title);
+      alert("New Message: " + payload.body.title);
     });
   </script>
 </body>
